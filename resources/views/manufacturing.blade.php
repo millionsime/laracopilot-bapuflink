@@ -1,94 +1,120 @@
 @extends('layouts.app')
 
-@section('title', 'Manufacturing & Quality')
-
 @section('content')
-    <div class="bg-white rounded-lg shadow-md overflow-hidden">
-        <div class="relative">
-            <img src="{{ asset('images/manufacturing-hero.jpg') }}" alt="Baraka Manufacturing Facility" class="w-full h-64 object-cover">
-            <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-                <h1 class="text-4xl md:text-5xl font-bold text-white">Manufacturing & Quality</h1>
-            </div>
+<div class="bg-green-50 min-h-screen">
+    <div class="container mx-auto px-4 py-16">
+        <!-- Hero Section -->
+        <div class="text-center mb-16">
+            <h1 class="text-4xl md:text-5xl font-bold text-green-800 mb-6">Manufacturing & Quality</h1>
+            <p class="text-xl text-gray-700 max-w-3xl mx-auto">Discover our state-of-the-art manufacturing facilities and commitment to quality and safety standards</p>
         </div>
-    </div>
 
-    <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div class="bg-white p-8 rounded-lg shadow-md">
-            <h2 class="text-2xl font-bold text-baraka mb-4">Our Manufacturing Facility</h2>
-            <p class="mb-4">Baraka Agro PLC is proud to operate a state-of-the-art manufacturing facility in Shashemene, Oromia. Our facility is designed to produce high-quality organic liquid fertilizers using the latest technology and sustainable practices.</p>
-            <p class="mb-4">Located in the heart of Ethiopia, our facility benefits from a favorable climate and access to natural resources, allowing us to produce premium fertilizers that meet the unique needs of Ethiopian farmers.</p>
+        <!-- Manufacturing Process -->
+        <div class="mb-16">
+            <div class="flex flex-col md:flex-row items-center justify-between">
+                <div class="md:w-1/2 mb-8 md:mb-0">
+                    <h2 class="text-3xl font-bold text-green-800 mb-6">Our Manufacturing Process</h2>
+                    <p class="text-gray-700 mb-6">At BARAKA AGRO PLC, we take pride in our advanced manufacturing process, which ensures the production of high-quality, organic liquid fertilizers. Our facilities are designed to meet international standards and are equipped with cutting-edge technology to guarantee consistent quality and safety.</p>
+                    <div class="bg-white p-6 rounded-lg shadow-md mb-6">
+                        <h3 class="text-xl font-semibold text-green-700 mb-4">Key Steps in Our Process</h3>
+                        <ol class="list-decimal list-inside text-gray-700 space-y-2">
+                            <li>Raw material sourcing and quality control</li>
+                            <li>Precise formulation and mixing</li>
+                            <li>Advanced filtration and purification</li>
+                            <li>Rigorous testing and quality assurance</li>
+                            <li>Packaging and labeling</li>
+                            <li>Final inspection and distribution</li>
+                        </ol>
+                    </div>
+                </div>
+                <div class="md:w-1/2">
+                    <img src="{{ asset('images/manufacturing-process.jpg') }}" alt="Manufacturing Process" class="rounded-lg shadow-xl">
+                </div>
+            </div>
         </div>
-        <div class="bg-white p-8 rounded-lg shadow-md">
-            <img src="{{ asset('images/factory.jpg') }}" alt="Baraka Manufacturing Facility" class="w-full h-auto rounded-lg">
-        </div>
-    </div>
 
-    <div class="mt-12 bg-white p-8 rounded-lg shadow-md">
-        <h2 class="text-2xl font-bold text-baraka mb-6">Quality Control</h2>
-        <p class="mb-4">At Baraka Agro PLC, quality is our top priority. We have implemented rigorous quality control measures throughout our production process to ensure that our fertilizers meet the highest standards of purity, potency, and safety.</p>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-            <div>
-                <h3 class="text-xl font-bold mb-2">Raw Material Testing</h3>
-                <p>All raw materials used in our fertilizers undergo thorough testing to ensure they meet our strict quality standards and are free from contaminants.</p>
-            </div>
-            <div>
-                <h3 class="text-xl font-bold mb-2">Production Monitoring</h3>
-                <p>Our production process is closely monitored at every stage to maintain consistency and quality. We use advanced technology and trained personnel to ensure that our fertilizers are produced to the highest standards.</p>
-            </div>
-            <div>
-                <h3 class="text-xl font-bold mb-2">Final Product Testing</h3>
-                <p>Before our fertilizers are released for sale, they undergo rigorous final product testing to ensure they meet our quality specifications and regulatory requirements.</p>
-            </div>
-            <div>
-                <h3 class="text-xl font-bold mb-2">Continuous Improvement</h3>
-                <p>We are committed to continuous improvement in our quality control processes. We regularly review and update our quality control procedures to ensure that we are always meeting and exceeding industry standards.</p>
+        <!-- Quality Assurance -->
+        <div class="mb-16">
+            <h2 class="text-3xl font-bold text-green-800 mb-12 text-center">Quality Assurance</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white p-8 rounded-lg shadow-md">
+                    <div class="text-green-600 mb-4">
+                        <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Stringent Quality Control</h3>
+                    <p class="text-gray-600">Our manufacturing process includes multiple quality control checkpoints to ensure that every batch of Baraka Organic Liquid Fertilizer meets our strict standards for purity, potency, and safety.</p>
+                </div>
+                <div class="bg-white p-8 rounded-lg shadow-md">
+                    <div class="text-green-600 mb-4">
+                        <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Certified Facilities</h3>
+                    <p class="text-gray-600">Our manufacturing facilities are certified to meet international quality and safety standards, ensuring that our products are safe for use and meet the highest industry benchmarks.</p>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="mt-12 bg-white p-8 rounded-lg shadow-md">
-        <h2 class="text-2xl font-bold text-baraka mb-6">Sustainable Manufacturing</h2>
-        <p class="mb-4">Baraka Agro PLC is committed to sustainable manufacturing practices that minimize our environmental impact and promote the health of our communities and the planet.</p>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-            <div>
-                <h3 class="text-xl font-bold mb-2">Energy Efficiency</h3>
-                <p>We use energy-efficient equipment and processes to minimize our energy consumption and reduce our carbon footprint.</p>
-            </div>
-            <div>
-                <h3 class="text-xl font-bold mb-2">Waste Reduction</h3>
-                <p>We implement waste reduction strategies throughout our production process to minimize waste and maximize resource efficiency.</p>
-            </div>
-            <div>
-                <h3 class="text-xl font-bold mb-2">Water Conservation</h3>
-                <p>We use water-efficient technologies and practices to conserve water resources and minimize our water footprint.</p>
-            </div>
-            <div>
-                <h3 class="text-xl font-bold mb-2">Community Engagement</h3>
-                <p>We engage with our local communities to promote sustainable practices and support environmental conservation initiatives.</p>
+        <!-- Safety Measures -->
+        <div class="mb-16">
+            <h2 class="text-3xl font-bold text-green-800 mb-12 text-center">Safety Measures</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-lg transition duration-300">
+                    <div class="text-green-600 mb-4">
+                        <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Strict Safety Protocols</h3>
+                    <p class="text-gray-600">We adhere to strict safety protocols throughout our manufacturing process to protect our employees, the environment, and the final product.</p>
+                </div>
+                <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-lg transition duration-300">
+                    <div class="text-green-600 mb-4">
+                        <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Employee Training</h3>
+                    <p class="text-gray-600">Our employees undergo rigorous training to ensure they are knowledgeable about safety procedures and best practices in the manufacturing process.</p>
+                </div>
+                <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-lg transition duration-300">
+                    <div class="text-green-600 mb-4">
+                        <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Environmental Protection</h3>
+                    <p class="text-gray-600">We implement environmentally friendly practices to minimize our impact on the surrounding ecosystem and promote sustainable manufacturing.</p>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="mt-12 bg-white p-8 rounded-lg shadow-md">
-        <h2 class="text-2xl font-bold text-baraka mb-6">Certifications</h2>
-        <p class="mb-4">Baraka Agro PLC is committed to meeting the highest standards of quality and safety in the production of our organic liquid fertilizers. We have obtained the following certifications to demonstrate our commitment to excellence:</p>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-            <div>
-                <h3 class="text-xl font-bold mb-2">ISO 9001:2015</h3>
-                <p>This certification demonstrates that our quality management system meets the requirements of the ISO 9001 standard, ensuring that we consistently deliver high-quality products and services.</p>
-            </div>
-            <div>
-                <h3 class="text-xl font-bold mb-2">ISO 14001:2015</h3>
-                <p>This certification shows that our environmental management system meets the requirements of the ISO 14001 standard, demonstrating our commitment to sustainable practices and environmental protection.</p>
-            </div>
-            <div>
-                <h3 class="text-xl font-bold mb-2">Organic Certification</h3>
-                <p>Our organic certification ensures that our fertilizers are produced using organic ingredients and meet the strict requirements of organic farming standards.</p>
-            </div>
-            <div>
-                <h3 class="text-xl font-bold mb-2">Ethiopian Food and Drug Administration (EFDA) Approval</h3>
-                <p>Our EFDA approval demonstrates that our fertilizers meet the regulatory requirements for safety and efficacy in Ethiopia.</p>
+        <!-- Manufacturing Facilities -->
+        <div class="mb-16">
+            <h2 class="text-3xl font-bold text-green-800 mb-8">Our Manufacturing Facilities</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <img src="{{ asset('images/facility1.jpg') }}" alt="Manufacturing Facility" class="w-full h-64 object-cover rounded-lg mb-4">
+                    <h3 class="text-xl font-semibold mb-2">Main Production Plant</h3>
+                    <p class="text-gray-600">Our main production plant in Shashemene, Oromia, is equipped with state-of-the-art machinery and technology to ensure efficient and high-quality production of Baraka Organic Liquid Fertilizer.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <img src="{{ asset('images/facility2.jpg') }}" alt="Quality Control Lab" class="w-full h-64 object-cover rounded-lg mb-4">
+                    <h3 class="text-xl font-semibold mb-2">Quality Control Laboratory</h3>
+                    <p class="text-gray-600">Our dedicated quality control laboratory is staffed with experienced professionals who conduct rigorous testing to ensure that every batch of Baraka Organic Liquid Fertilizer meets our strict quality standards.</p>
+                </div>
             </div>
         </div>
+
+        <!-- Call to Action -->
+        <div class="bg-green-700 rounded-lg p-12 text-center text-white">
+            <h2 class="text-3xl font-bold mb-6">Experience Our Commitment to Quality</h2>
+            <p class="text-xl mb-8">Discover how our advanced manufacturing processes and strict quality controls ensure the highest standards for our organic liquid fertilizers.</p>
+            <a href="{{ route('contact') }}" class="bg-white hover:bg-gray-100 text-green-700 font-bold py-3 px-6 rounded-lg transition duration-300">Contact Us Today</a>
+        </div>
     </div>
+</div>
 @endsection

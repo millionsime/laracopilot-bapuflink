@@ -2,79 +2,67 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Batch;
-use App\Models\QRCode;
 use Illuminate\Http\Request;
+use App\Models\QRCode;
+use App\Models\Product;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Illuminate\Support\Str;
+use PDF;
 
 class QRCodeController extends Controller
 {
     public function index()
     {
-        $batches = Batch::all();
-        return view('admin.qrcodes.index', compact('batches'));
+        $qrCodes = QRCode::with('product')->latest()->paginate(10);
+        return view('admin.qr-codes.index', compact('qrCodes'));
     }
 
     public function create()
     {
-        $batches = Batch::all();
-        return view('admin.qrcodes.create', compact('batches'));
+        $products = Product::all();
+        return view('admin.qr-codes.create', compact('products'));
     }
 
-    public function generate(Request $request)
+    public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'batch_id' => 'required|exists:batches,id',
+        $validated = $request->validate([
+            'product_id' => 'required|exists:products,id',
+            'batch_number' => 'required|string',
             'quantity' => 'required|integer|min:1',
         ]);
 
-        $batch = Batch::findOrFail($validatedData['batch_id']);
-        $quantity = $validatedData['quantity'];
+        $qrCodes = [];
 
-        for ($i = 0; $i < $quantity; $i++) {
+        for ($i = 0; $i < $validated['quantity']; $i++) {
             $token = Str::random(32);
-            $qrCode = new QRCode();
-            $qrCode->batch_id = $batch->id;
-            $qrCode->token = $token;
-            $qrCode->status = 'unused';
-            $qrCode->save();
 
-            // Generate QR code image
-            $qrCodeImage = QrCode::size(200)
-                ->generate(route('verify', ['token' => $token]));
+            $qrCode = QRCode::create([
+                'product_id' => $validated['product_id'],
+                'batch_number' => $validated['batch_number'],
+                'token' => $token,
+                'status' => 'unused',
+            ]);
 
-            // Save QR code image to storage
-            $path = 'qrcodes/' . $token . '.svg';
-            file_put_contents(storage_path('app/public/' . $path), $qrCodeImage);
+            $qrCodes[] = [
+                'id' => $qrCode->id,
+                'token' => $token,
+                'batch_number' => $validated['batch_number'],
+                'product_name' => $qrCode->product->name,
+            ];
         }
 
-        return redirect()->route('admin.qrcodes.index')->with('success', 'QR codes generated successfully.');
+        return redirect()->route('admin.qr-codes.index')->with('success', 'QR codes generated successfully.');
     }
 
-    public function export(Batch $batch)
+    public function export($id)
     {
-        $qrcodes = $batch->qrcodes;
+        $qrCode = QRCode::findOrFail($id);
 
-        $csvData = "Token,Status,Scan Count,First Scan Time,First Scan Location\n";
-        foreach ($qrcodes as $qrCode) {
-            $csvData .= $qrCode->token . "," . $qrCode->status . "," . $qrCode->scan_count . "," . $qrCode->first_scan_time . "," . $qrCode->first_scan_location . "\n";
-        }
+        $qrCodeImage = QrCode::size(200)
+            ->generate(route('verify', ['token' => $qrCode->token]));
 
-        $filename = 'qrcodes_' . $batch->batch_number . '.csv';
+        $pdf = PDF::loadView('admin.qr-codes.export', compact('qrCode', 'qrCodeImage'));
 
-        $headers = [
-            'Content-Type' => 'text/csv',
-            'Content-Disposition' => 'attachment; filename="' . $filename . '"',
-        ];
-
-        return response()->make($csvData, 200, $headers);
-    }
-
-    public function print(Batch $batch)
-    {
-        $qrcodes = $batch->qrcodes;
-
-        return view('admin.qrcodes.print', compact('batch', 'qrcodes'));
+        return $pdf->download('qr-code-' . $qrCode->id . '.pdf');
     }
 }

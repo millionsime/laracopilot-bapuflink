@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\QRCode;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use App\Models\QRCode;
+use App\Models\QRScan;
+use Stevebauman\Location\Facades\Location;
 
 class VerificationController extends Controller
 {
@@ -16,39 +17,20 @@ class VerificationController extends Controller
             return view('verification.invalid');
         }
 
-        $batch = $qrCode->batch;
-        $product = $batch->product;
+        $ip = request()->ip();
+        $location = Location::get($ip);
 
-        // Log the scan
-        $scanData = [
+        $scan = QRScan::create([
             'qr_code_id' => $qrCode->id,
-            'scan_time' => now(),
-            'ip_address' => request()->ip(),
-            'user_agent' => request()->userAgent(),
-        ];
+            'batch_number' => $qrCode->batch_number,
+            'ip_address' => $ip,
+            'location' => $location ? $location->cityName . ', ' . $location->countryName : 'Unknown',
+            'is_suspicious' => QRScan::where('qr_code_id', $qrCode->id)->count() > 0,
+        ]);
 
-        DB::table('qr_code_scans')->insert($scanData);
-
-        // Update QR code status and scan count
-        $qrCode->scan_count += 1;
-
-        if ($qrCode->status === 'unused') {
-            $qrCode->status = 'verified';
-            $qrCode->first_scan_time = now();
-            $qrCode->first_scan_location = $this->getLocationFromIP(request()->ip());
-        } elseif ($qrCode->status === 'verified') {
-            $qrCode->status = 'suspicious';
-        }
-
+        $qrCode->status = $scan->is_suspicious ? 'suspicious' : 'verified';
         $qrCode->save();
 
-        return view('verification.result', compact('qrCode', 'batch', 'product'));
-    }
-
-    private function getLocationFromIP($ip)
-    {
-        // In a real application, you would use a geolocation service
-        // This is a simplified example
-        return 'Unknown Location';
+        return view('verification.result', compact('qrCode', 'scan'));
     }
 }

@@ -10,21 +10,19 @@ class QRCode extends Model
     use HasFactory;
 
     protected $fillable = [
-        'batch_id',
+        'product_id',
+        'batch_number',
         'token',
         'status',
-        'scan_count',
-        'first_scan_time',
-        'first_scan_location',
     ];
 
-    public function batch()
+    public function product()
     {
-        return $this->belongsTo(Batch::class);
+        return $this->belongsTo(Product::class);
     }
 
     public function scans()
     {
-        return $this->hasMany(QRCodeScan::class);
+        return $this->hasMany(QRScan::class);
     }
 }

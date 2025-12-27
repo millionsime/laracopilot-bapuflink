@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Models\Product;
 
 class ProductController extends Controller
 {
@@ -20,13 +20,16 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
+        $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'price' => 'nullable|numeric',
+            'description' => 'required|string',
+            'formulation' => 'required|string',
+            'application_rate' => 'required|string',
+            'manufacturing_location' => 'required|string',
+            'status' => 'required|string',
         ]);
 
-        Product::create($validatedData);
+        Product::create($validated);
 
         return redirect()->route('admin.products.index')->with('success', 'Product created successfully.');
     }
@@ -38,13 +41,16 @@ class ProductController extends Controller
 
     public function update(Request $request, Product $product)
     {
-        $validatedData = $request->validate([
+        $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'price' => 'nullable|numeric',
+            'description' => 'required|string',
+            'formulation' => 'required|string',
+            'application_rate' => 'required|string',
+            'manufacturing_location' => 'required|string',
+            'status' => 'required|string',
         ]);
 
-        $product->update($validatedData);
+        $product->update($validated);
 
         return redirect()->route('admin.products.index')->with('success', 'Product updated successfully.');
     }
@@ -52,7 +58,6 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         $product->delete();
-
         return redirect()->route('admin.products.index')->with('success', 'Product deleted successfully.');
     }
 }

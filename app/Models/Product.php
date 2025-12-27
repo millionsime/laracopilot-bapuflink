@@ -12,11 +12,14 @@ class Product extends Model
     protected $fillable = [
         'name',
         'description',
-        'price',
+        'formulation',
+        'application_rate',
+        'manufacturing_location',
+        'status',
     ];
 
-    public function batches()
+    public function qrCodes()
     {
-        return $this->hasMany(Batch::class);
+        return $this->hasMany(QRCode::class);
     }
 }
